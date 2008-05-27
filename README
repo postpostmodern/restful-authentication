@@ -97,7 +97,7 @@ acts as authenticated.  Currently it requires Rails 1.2.6 or above.
 
 To use:
 
-  ./script/generate authenticated user sessions \
+  ./script/generate authenticated user session \
     --include-activation \
     --stateful \
     --rspec \
@@ -110,8 +110,8 @@ To use:
   basic controller with the create method. You probably want to say "User" here.
 
 * The second parameter specifies the session controller name.  This is the
-  controller that handles the actual login/logout function on the site.
-  (probably: "Session").
+  controller that handles the actual login/logout function on the site. Since 
+  there will only be one session, it should be singular. (probably: "Session").
 
 * --include-activation: Generates the code for a ActionMailer and its respective
   Activation Code through email.
