@@ -14,7 +14,8 @@ class AuthenticatedGenerator < Rails::Generator::NamedBase
                 :controller_class_name,
                 :controller_singular_name,
                 :controller_plural_name,
-                :controller_file_name
+                :controller_file_name,
+                :controller_route
   alias_method  :controller_table_name, :controller_plural_name
   attr_reader   :model_controller_name,
                 :model_controller_class_path,
@@ -42,8 +43,10 @@ class AuthenticatedGenerator < Rails::Generator::NamedBase
 
     if @controller_class_nesting.empty?
       @controller_class_name = @controller_class_name_without_nesting
+      @controller_route = @controller_singular_name
     else
       @controller_class_name = "#{@controller_class_nesting}::#{@controller_class_name_without_nesting}"
+      @controller_route = @controller_class_path + '/' + @controller_singular_name
     end
 
     # model controller

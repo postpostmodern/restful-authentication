@@ -104,8 +104,8 @@ describe <%= controller_class_name %>Controller do
     it "should route {:controller => '<%= controller_file_path %>', :action => 'new'} to /login" do
       route_for(:controller => '<%= controller_file_path %>', :action => 'new').should == "/login"
     end
-    it "should route {:controller => '<%= controller_file_path %>', :action => 'create'} to /<%= controller_file_path %>" do
-      route_for(:controller => '<%= controller_file_path %>', :action => 'create').should == "/<%= controller_file_path %>"
+    it "should route {:controller => '<%= controller_file_path %>', :action => 'create'} to /<%= controller_route %>" do
+      route_for(:controller => '<%= controller_file_path %>', :action => 'create').should == "/<%= controller_route %>"
     end
     it "should route {:controller => '<%= controller_file_path %>', :action => 'destroy'} to /logout" do
       route_for(:controller => '<%= controller_file_path %>', :action => 'destroy').should == "/logout"
@@ -116,10 +116,10 @@ describe <%= controller_class_name %>Controller do
     it "should generate params {:controller => '<%= controller_file_path %>', :action => 'new'} from GET /login" do
       params_from(:get, '/login').should == {:controller => '<%= controller_file_path %>', :action => 'new'}
     end
-    it "should generate params {:controller => '<%= controller_file_path %>', :action => 'create'} from POST /<%= controller_file_path %>" do
-      params_from(:post, '/<%= controller_file_path %>').should == {:controller => '<%= controller_file_path %>', :action => 'create'}
+    it "should generate params {:controller => '<%= controller_file_path %>', :action => 'create'} from POST /<%= controller_route %>" do
+      params_from(:post, '/<%= controller_route %>').should == {:controller => '<%= controller_file_path %>', :action => 'create'}
     end
-    it "should generate params {:controller => '<%= controller_file_path %>', :action => 'destroy'} from DELETE /<%= controller_file_path %>" do
+    it "should generate params {:controller => '<%= controller_file_path %>', :action => 'destroy'} from DELETE /logout" do
       params_from(:delete, '/logout').should == {:controller => '<%= controller_file_path %>', :action => 'destroy'}
     end
   end
@@ -128,11 +128,11 @@ describe <%= controller_class_name %>Controller do
     before(:each) do
       get :new
     end
-    it "should route <%= table_name %>_path() to /<%= controller_file_path %>" do
-      <%= controller_file_name %>_path().should == "/<%= controller_file_path %>"
+    it "should route <%= controller_singular_name %>_path() to /<%= controller_route %>" do
+      <%= controller_singular_name %>_path().should == "/<%= controller_route %>"
     end
     it "should route new_<%= table_name.singularize %>_path() to /<%= controller_file_path %>/new" do
-      new_<%= controller_table_name.singularize %>_path().should == "/<%= controller_file_path %>/new"
+      new_<%= controller_table_name.singularize %>_path().should == "/<%= controller_route %>/new"
     end
   end
   
